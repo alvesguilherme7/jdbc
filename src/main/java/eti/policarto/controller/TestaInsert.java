@@ -7,8 +7,14 @@ public class TestaInsert {
 
     public static void main( String[] args ) throws Exception {
 
-        final Produto produto = new Produto("Smartphone H1", "Television Smartphone H1");
+        Produto produto = new Produto("Smartphone H1", "Television Smartphone H1",1L);
         new ProdutoDAO().save(produto);
+
+        Produto produto2 = new Produto("Fogão Elétrico", "Brastemp Fogão Elétrico",2L);
+        new ProdutoDAO().save(produto2);
+
+        Produto produto3 = new Produto("Bicicleta", "Bicicleta Shimano",3L);
+        new ProdutoDAO().save(produto3);
 
     }
 }

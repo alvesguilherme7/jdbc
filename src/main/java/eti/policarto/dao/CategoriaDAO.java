@@ -2,31 +2,28 @@ package eti.policarto.dao;
 
 import eti.policarto.commons.ConexaoComPoolFactory;
 import eti.policarto.model.Categoria;
-import eti.policarto.model.Produto;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoDAO {
+public class CategoriaDAO {
 
-    public Produto save(Produto produto) throws SQLException {
+    public Categoria save(Categoria categoria) throws SQLException {
 
         try (Connection conn = ConexaoComPoolFactory.getConnection()) {
 
             conn.setAutoCommit(false);
 
-            final String sql = "INSERT INTO PRODUTO (nome, descricao, categoria_id) VALUES (?, ?, ?) ";
+            final String sql = "INSERT INTO CATEGORIA (descricao) VALUES (?) ";
             try (PreparedStatement pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-                pstm.setString(1, produto.getNome());
-                pstm.setString(2, produto.getDescricao());
-                pstm.setLong(3, produto.getCategoriaId());
+                pstm.setString(1, categoria.getDescricao());
                 pstm.execute();
 
                 try (ResultSet rsKeys = pstm.getGeneratedKeys()) {
                     while (rsKeys.next())
-                        produto.setId(rsKeys.getLong(1));
+                        categoria.setId(rsKeys.getLong(1));
                 }
 
             } catch (Exception e) {
@@ -35,47 +32,45 @@ public class ProdutoDAO {
 
             conn.commit();
 
-            return produto;
+            return categoria;
 
         }
     }
 
-    public List<Produto> findAll() throws SQLException {
-        List<Produto> produtos = new ArrayList<>();
+    public Categoria findById(Long id) throws SQLException {
         try (Connection conn = ConexaoComPoolFactory.getConnection()) {
-            final String sql = "SELECT * FROM PRODUTO";
+            final String sql = " SELECT * FROM CATEGORIA WHERE ID = ? ";
             try (PreparedStatement pstm = conn.prepareStatement(sql)) {
+                pstm.setLong(1, id);
                 pstm.execute();
-                try (ResultSet rsProdutos = pstm.getResultSet()) {
-                    while (rsProdutos.next()) {
-                        produtos.add(new Produto(rsProdutos));
-                    }
+                try (ResultSet rsCategorias = pstm.getResultSet()) {
+                    if (rsCategorias.next())
+                        return new Categoria(rsCategorias);
                 }
             }
         }
-        return produtos;
+        return null;
     }
 
-    public List<Produto> findByCategoria(Categoria categoria) throws SQLException {
-        List<Produto> produtos = new ArrayList<>();
+    public List<Categoria> findAll() throws SQLException {
+        List<Categoria> categorias = new ArrayList<>();
         try (Connection conn = ConexaoComPoolFactory.getConnection()) {
-            final String sql = "SELECT * FROM PRODUTO WHERE ID = ? ";
+            final String sql = "SELECT * FROM CATEGORIA";
             try (PreparedStatement pstm = conn.prepareStatement(sql)) {
-                pstm.setLong(1, categoria.getId());
                 pstm.execute();
-                try (ResultSet rsProdutos = pstm.getResultSet()) {
-                    while (rsProdutos.next()) {
-                        produtos.add(new Produto(rsProdutos));
+                try (ResultSet rsCategorias = pstm.getResultSet()) {
+                    while (rsCategorias.next()) {
+                        categorias.add(new Categoria(rsCategorias));
                     }
                 }
             }
         }
-        return produtos;
+        return categorias;
     }
 
     public boolean deleteById(Long id) throws SQLException {
         try( Connection conn = ConexaoComPoolFactory.getConnection() ){
-            try( PreparedStatement pstm = conn.prepareStatement(" DELETE FROM PRODUTO WHERE ID = ? ") ){
+            try( PreparedStatement pstm = conn.prepareStatement(" DELETE FROM CATEGORIA WHERE ID = ? ") ){
                 pstm.setLong(1, id);
                 pstm.execute();
                 return pstm.getUpdateCount() > 0;
