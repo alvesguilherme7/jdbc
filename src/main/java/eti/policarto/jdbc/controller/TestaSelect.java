@@ -1,9 +1,9 @@
-package eti.policarto.controller;
+package eti.policarto.jdbc.controller;
 
-import eti.policarto.dao.CategoriaDAO;
-import eti.policarto.dao.ProdutoDAO;
-import eti.policarto.model.Categoria;
-import eti.policarto.model.Produto;
+import eti.policarto.jdbc.dao.CategoriaDAO;
+import eti.policarto.jdbc.dao.ProdutoDAO;
+import eti.policarto.jdbc.model.Categoria;
+import eti.policarto.jdbc.model.Produto;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;

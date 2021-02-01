@@ -1,7 +1,7 @@
-package eti.policarto.controller;
+package eti.policarto.jdbc.controller;
 
-import eti.policarto.dao.ProdutoDAO;
-import eti.policarto.model.Produto;
+import eti.policarto.jdbc.dao.ProdutoDAO;
+import eti.policarto.jdbc.model.Produto;
 
 public class TestaInsert {
 

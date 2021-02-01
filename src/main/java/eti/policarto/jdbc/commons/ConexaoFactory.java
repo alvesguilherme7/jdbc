@@ -1,4 +1,4 @@
-package eti.policarto.commons;
+package eti.policarto.jdbc.commons;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;

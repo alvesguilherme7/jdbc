@@ -1,8 +1,8 @@
-package eti.policarto.dao;
+package eti.policarto.jdbc.dao;
 
-import eti.policarto.commons.ConexaoComPoolFactory;
-import eti.policarto.model.Categoria;
-import eti.policarto.model.Produto;
+import eti.policarto.jdbc.commons.ConexaoComPoolFactory;
+import eti.policarto.jdbc.model.Categoria;
+import eti.policarto.jdbc.model.Produto;
 
 import java.sql.*;
 import java.util.ArrayList;

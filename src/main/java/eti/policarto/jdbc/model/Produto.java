@@ -1,4 +1,4 @@
-package eti.policarto.model;
+package eti.policarto.jdbc.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
