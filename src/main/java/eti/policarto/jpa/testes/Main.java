@@ -1,5 +1,6 @@
 package eti.policarto.jpa.testes;
 
+import eti.policarto.jpa.commons.Classificacao;
 import eti.policarto.jpa.model.Categoria;
 import eti.policarto.jpa.model.Produto;
 
@@ -23,5 +24,6 @@ public class Main {
         entityManager.getTransaction().begin();
         entityManager.persist(bolaFutebol);
         entityManager.getTransaction().commit();
+
     }
 }
