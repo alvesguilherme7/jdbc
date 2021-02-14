@@ -9,6 +9,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.List;
 
+@NamedQuery(name = "produtosComCategoria", query = " select p from Produto p left join fetch p.categoria ")
+
 @Entity
 @Getter @Setter @ToString(exclude = "categoria") @EqualsAndHashCode
 public class Produto {

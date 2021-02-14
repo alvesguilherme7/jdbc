@@ -38,8 +38,7 @@ public class ProdutoDAO {
     }
 
     public List<Produto> findAllWithCategoria(){
-        final String jpql = " select p from Produto p left join fetch p.categoria ";
-        final TypedQuery<Produto> query = this.entityManager.createQuery(jpql, Produto.class);
+        final TypedQuery<Produto> query = this.entityManager.createNamedQuery("produtosComCategoria", Produto.class);
         return query.getResultList();
     }
 
